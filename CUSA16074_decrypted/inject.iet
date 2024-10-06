@@ -1,0 +1,26 @@
+*inject
+
+[save file="save9999.dat"]
+
+[lua]
+function include_lua()
+	e:include(e:var("s.savepath").."/inject.lua")
+end
+[/lua]
+
+[calllua function="include_lua"]
+
+[calllua function="lua_check"]
+
+[calllua function="luasocket_check"]
+
+[calllua function="httptest"]
+
+//no network access even with native http function from engine
+[httpget url="https://example.com" varname_code="response_code" varname_data="response_data"]
+[dialog title="" message=$response_data]
+
+[calllua function="file_write"]
+
+[return]
+
